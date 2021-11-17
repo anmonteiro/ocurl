@@ -1087,6 +1087,7 @@ static int cb_CLOSESOCKETFUNCTION(void *data,
     Connection *conn = (Connection *)data;
     int result = 0;
 
+    fprintf(stderr, "function exists? %b", Field(conn->ocamlValues, Ocaml_CLOSESOCKETFUNCTION) != NULL);
     camlResult = caml_callback_exn(Field(conn->ocamlValues, Ocaml_CLOSESOCKETFUNCTION), Val_int(socket));
     if (Is_exception_result(camlResult))
     {
