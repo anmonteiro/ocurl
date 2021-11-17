@@ -1088,11 +1088,8 @@ static int cb_CLOSESOCKETFUNCTION(void *data,
     int result = 0;
 
     fprintf(stderr, "socket? %d %d\n", socket, socket  != NULL);
-    CAMLlocal1(fn);
     fprintf(stderr, "conn exists? %d\n", conn  != NULL);
-    fn = Field(conn->ocamlValues, Ocaml_CLOSESOCKETFUNCTION);
-    fprintf(stderr, "function exists? %d\n", fn  != NULL);
-    camlResult = caml_callback_exn(fn, Val_int(socket));
+    camlResult = caml_callback(Field(conn->ocamlValues, Ocaml_CLOSESOCKETFUNCTION), Val_int(socket));
     if (Is_exception_result(camlResult))
     {
       result = 1;
